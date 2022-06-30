@@ -23,5 +23,15 @@ namespace CriptoApi.Controllers
         {
             return _contexto.Coins.AsNoTracking().ToList();
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Coins>> PostCoin(Coins coin)
+        {
+            _contexto.Coins.Add(coin); 
+
+            await _contexto.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(PostCoin), coin);
+        }
     }
 }
